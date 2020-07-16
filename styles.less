@@ -1,0 +1,588 @@
+@width: 800px;
+
+.category-container {
+    width: @width;
+
+    table {
+        border-spacing: 0px;
+        border-collapse: collapse;
+    }
+
+    thead {
+        width: @width;
+        display: block;
+        margin-top: 10px;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid #444444;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 25px;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: 270px;
+    }
+
+    th:nth-child(n+3):nth-last-child(n+1),
+    td:nth-child(n+3):nth-last-child(n+1) {
+        width: 150px;
+    }
+
+    .category-list-item:nth-child(even) {
+        background-color: #e5e5e5;
+    }
+
+    .category-list-container {
+        height: 200px;
+        width: @width;
+        display: block;
+        overflow: auto;
+        margin-bottom: 10px;
+    }
+
+    .category-input-container {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 110px auto 120px;
+
+        >:first-child {
+            grid-row: 1;
+            grid-column: 1;
+        }
+
+        >:nth-child(2) {
+            grid-row: 1;
+            grid-column: 2;
+            width: 93%;
+        }
+
+        >:nth-child(3) {
+            grid-row: 2;
+            grid-column: 1;
+        }
+
+        >:nth-child(4) {
+            grid-row: 2;
+            grid-column: 2;
+        }
+        
+        >:last-child {
+            grid-column: 3;
+            grid-row: 1 / span 2;
+        }
+    }
+}
+
+.category-group-divider {
+    width: @width;
+    text-align: left;
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: lightgrey;
+}
+
+#btnTransform {
+    width: @width;
+}
+
+#printPageCountArea {
+    margin-top: 10px;
+}
+
+#printPageButtonsArea>div {
+    width: @width;
+    margin-top: 10px;
+}
+
+#currentPages {
+    width: @width;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.break-after {
+    display: block;
+    page-break-after: always;
+    position: relative;
+}
+
+.break-before {
+    display: block;
+    page-break-before: always;
+    position: relative;
+}
+
+@media print {
+
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+
+    .a4 {
+        width: 210mm;
+        height: 297mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        page-break-after: always;
+    }
+}
+
+@media screen {
+    .a4 {
+        padding-top: 10mm;
+        padding-bottom: 10mm;
+    }
+}
+
+@printMarginBottom: 15mm;
+
+.credit-report {
+    @pageWidth: 190mm;
+    @border: 0.5mm solid red;
+    @fontSmall: 3.5mm;
+    @fontMedium: 4.5mm;
+
+    @spaceSmall: 2mm;
+
+    width: @pageWidth;
+    // height: 236mm;
+    color: red;
+    font-size: @fontSmall;
+    display: block flex;
+    flex-direction: column;
+
+    @media print {
+        margin-bottom: @printMarginBottom;
+    }
+
+    .border-base {
+        border: @border;
+        border-spacing: 0;
+        border-collapse: collapse;
+        padding: 0;
+    }
+
+    .border-bottom {
+        .border-base();
+        border-top: hidden;
+        border-left: hidden;
+        border-right: hidden;
+    }
+
+    .report-title {
+        font-size: 8mm;
+        font-weight: bold;
+        height: 15mm;
+        text-align: center;
+    }
+
+    .report-year-and-number {
+        display: flex;
+        justify-content: space-between;
+
+        :first-child {
+            text-indent: 5mm;
+        }
+
+        :last-child {
+            white-space: pre;
+        }
+    }
+
+    .outer-box {
+        .border-base();
+        margin-top: @spaceSmall;
+    }
+
+    .top-table {
+        width: 100%;
+        .border-bottom();
+
+        [rowspan="2"] {
+            font-size: @fontMedium;
+        }
+
+        td {
+            width: 40mm;
+            height: 20mm;
+            border: @border;
+            text-align: center;
+            height: 10mm;
+            white-space: pre;
+        }
+
+        td:nth-last-child(-n+2) {
+            text-align: right;
+        }
+
+        .column2 {
+            width: 30mm;
+            text-align: right;
+        }
+
+        tr:last-child td {
+            text-align: center;
+        }
+    }
+
+    .amount-box {
+        @amountHangulBoxWidth: 149mm;
+
+        height: 40mm;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .border-bottom();
+
+        >div {
+            height: 10mm;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: @fontMedium;
+            white-space: pre;
+        }
+
+        >div:first-child {
+            width: @amountHangulBoxWidth;
+            border: @border;
+        }
+
+        >div:last-child {
+            @halfWidth: @amountHangulBoxWidth / 2;
+            width: @halfWidth;
+            border-bottom: @border;
+            margin-left: @halfWidth;
+        }
+    }
+
+    .payer-name-box {
+        height: 10mm;
+        font-size: @fontMedium;
+        .border-bottom();
+
+        >:first-child {
+            width: 80mm;
+            height: 100%;
+            border-right: @border;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .description-box {
+        height: 104mm;
+        border: hidden;
+        font-size: @fontMedium;
+        display: flex;
+
+        div:first-child {
+            width: 40mm;
+            height: 100%;
+            border-right: @border;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 10mm;
+        }
+
+        div:last-child {
+            display: flex;
+            align-items: center;
+            text-indent: 2em;
+        }
+    }
+}
+
+.debit-report {
+    @border: 0.5mm solid blue;
+
+    @fontSmall: 3.3mm;
+    @fontMedium: 4.5mm;
+
+    @spaceXSmall: 1mm;
+    @spaceSmall: 2mm;
+    @spaceMedium: 4mm;
+
+    width: 190mm;
+    font-size: @fontSmall;
+
+    td {
+        font-size: @fontSmall;
+    }
+
+    @media print {
+        margin-bottom: @printMarginBottom;
+    }
+
+    .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .border-base {
+        border: @border;
+        border-spacing: 0;
+        padding: 0;
+        border-collapse: collapse;
+    }
+
+    .border-top-bottom {
+        .border-base();
+        border-left: hidden;
+        border-right: hidden;
+    }
+
+    .border-bottom {
+        .border-base();
+        border-top: hidden;
+        border-left: hidden;
+        border-right: hidden;
+    }
+
+    .border-right {
+        .border-base();
+        border-top: hidden;
+        border-bottom: hidden;
+        border-left: hidden;
+    }
+
+    .border-outer-hidden {
+        .border-base();
+        border: hidden;
+    }
+
+    .report-number {
+        text-align: right;
+        padding-right: @spaceSmall;
+        white-space: pre;
+    }
+
+    .outer-box {
+        border: @border;
+        margin-top: @spaceSmall;
+    }
+
+    .report-title {
+        height: 20mm;
+        font-size: 8mm;
+        font-weight: bold;
+        .flex-center();
+    }
+
+    .row-2 {
+        width: 100%;
+        .border-top-bottom();
+
+        td {
+            width: 20mm;
+            height: 10mm;
+            text-align: center;
+            border: @border;
+        }
+
+        tr:last-child>td {
+            height: 20mm;
+        }
+
+        td[rowspan="2"] {
+            width: 89mm;
+            font-size: 6mm;
+            font-weight: bold;
+        }
+    }
+
+    .row-3 {
+        width: 100%;
+        .border-bottom();
+
+        display: flex;
+        flex-direction: row;
+
+        table:first-child {
+            .border-right();
+
+            td {
+                height: 10mm;
+                .border-base();
+                white-space: pre;
+            }
+
+            td:first-child {
+                width: 20mm;
+                text-align: center;
+            }
+
+            td:nth-child(2) {
+                width: 28mm;
+                text-align: right;
+            }
+
+            td:last-child {
+                width: 12mm;
+                text-align: right;
+            }
+        }
+
+        table:nth-child(2) {
+            .border-right();
+
+            td {
+                .border-base();
+                height: 13.4mm;
+            }
+
+            td:first-child {
+                width: 9.5mm;
+                text-align: center;
+            }
+
+            td:last-child {
+                width: 56mm;
+                font-size: @fontMedium;
+                text-indent: @spaceMedium;
+            }
+        }
+
+        table:last-child {
+            .border-outer-hidden();
+
+            td {
+                .border-base();
+                height: 10mm;
+                white-space: pre;
+            }
+
+            td:first-child {
+                width: 20mm;
+                text-align: center;
+            }
+
+            td:nth-child(2) {
+                width: 30mm;
+                text-align: right;
+                white-space: pre;
+            }
+
+            td:last-child {
+                width: 12mm;
+                text-align: right;
+            }
+        }
+    }
+
+    .description {
+        height: 33mm;
+        .border-bottom();
+        font-size: @fontMedium;
+
+        display: flex;
+        flex-direction: row;
+
+        >:first-child {
+            width: 20mm;
+            .border-right();
+            .flex-center();
+        }
+
+        >:last-child {
+            display: flex;
+            align-items: center;
+            text-indent: 1em;
+        }
+    }
+
+    .row-5 {
+        .border-bottom();
+
+        display: flex;
+        flex-direction: row;
+
+        .row-5-left {
+            width: 129mm;
+            .border-right();
+
+            >:first-child {
+                text-align: center;
+                line-height: 2em;
+                white-space: pre;
+            }
+
+            >:nth-child(2) {
+                text-align: left;
+                text-indent: 16mm;
+            }
+
+            >:last-child {
+                width: 48%;
+                line-height: 1.6em;
+                text-align: right;
+            }
+
+        }
+
+        .row-5-right {
+            .border-outer-hidden();
+
+            td {
+                .border-base();
+                white-space: pre;
+            }
+
+            td:first-child {
+                width: 20mm;
+                height: 7.3mm;
+                text-align: center;
+            }
+
+            td:last-child {
+                width: 40mm;
+                text-align: right;
+            }
+        }
+    }
+
+    .row-6 {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        .border-bottom();
+
+        >:first-child {
+            width: 129mm;
+            height: 21mm;
+            .border-right();
+            .flex-center();
+        }
+
+        >:last-child {
+            width: 60.5mm;
+            .flex-center();
+            white-space: pre;
+            line-height: 1.7em;
+        }
+    }
+
+    .row-7 {
+        height: 26mm;
+    }
+}

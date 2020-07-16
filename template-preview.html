@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>템플릿 미리보기</title>
+</head>
+
+<body>
+    <div id="printArea"></div>
+    <script defer src="https://unpkg.com/mustache@4.0.1/mustache.min.js"></script>
+    <script defer src="commons.js" type="module"></script>
+    <script defer src="templates.js" type="module"></script>
+    <script type="module">
+        import { templates } from './templates.js';
+        const templateName = window.location.search.substring(1);
+        document.getElementById('printArea').innerHTML = templates[templateName];
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet/less" href="styles.less">
+</head>
+
+<body>
+	<div id="report"></div>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.3/less.min.js"></script>
+	<script defer src="https://unpkg.com/mustache@4.0.1/mustache.min.js"></script>
+	<script type="module">
+		import { templateDebitReport } from './template-debit-report.js';
+		document.getElementById('report').innerHTML =
+			Mustache.render(templateDebitReport, {
+				fiscalYear: 2013,
+				companyName: '회사명',
+				records: [
+					{
+						amount: "2,259,153",
+						amountHangul: "이백이십오만구천일백오십삼",
+						customer: "교사",
+						year: 2013,
+						month: "03",
+						dayOfMonth: "04",
+						description: "2월분 교직원급여",
+						category: {
+							title: "[801] 교원봉급",
+							category1: "관",
+							category2: "항",
+							category3: "목",
+						}
+					},
+					{
+						amount: "442,670",
+						amountHangul: "사십사만이천육백칠십",
+						customer: "급식비",
+						year: 2013,
+						month: "03",
+						dayOfMonth: "19",
+						description: "콩나물 외",
+						category: {
+							title: "[866] 수익자부담(급식비)",
+							category1: "관",
+							category2: "항",
+							category3: "목",
+						}
+					}
+				]
+			});
+	</script>
+</body>
+
+</html>

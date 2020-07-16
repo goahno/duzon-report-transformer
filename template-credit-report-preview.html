@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet/less" href="styles.less">
+</head>
+
+<body>
+	<div id="report"></div>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.3/less.min.js"></script>
+    <script defer src="https://unpkg.com/mustache@4.0.1/mustache.min.js"></script>
+	<script type="module">
+		import { templateCreditReport } from './template-credit-report.js';
+		document.getElementById('report').innerHTML =
+			Mustache.render(templateCreditReport, {
+				fiscalYear: 2013,
+				companyName: '회사명',
+				records: [
+					{
+						amount: "1,035,000",
+						amountHangul: "일백삼만오천",
+						customer: "거래처명1111",
+						year: 2013,
+						month: "03",
+						dayOfMonth: "02",
+						description: "신학기 입학금",
+						category: {
+							title: "[412] 입학금",
+							category1: "관",
+							category2: "항",
+							category3: "목",
+						}
+					},
+					{
+						amount: "140,000",
+						amountHangul: "일십사만",
+						customer: "거래처명2222",
+						year: 2013,
+						month: "03",
+						dayOfMonth: "05",
+						description: "수업료",
+						category: {
+							title: "[413] 수업료",
+							category1: "관",
+							category2: "항",
+							category3: "목",
+						}
+					}
+				]
+			});
+	</script>
+</body>
+
+</html>
