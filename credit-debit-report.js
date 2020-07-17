@@ -1,4 +1,5 @@
-import renderer from './templates.js';
+import rendererCommon from './templates-common.js';
+import rendererCreditDebit from './templates-credit-debit-report.js';
 import {
     debitPresetList,
     creditPresetList
@@ -24,24 +25,24 @@ function renderInputArea() {
     const inputArea = document.getElementById('inputArea');
     inputArea.innerHTML = '';
 
-    inputArea.appendChild(renderer.createCategoryGroupDivider());
-    inputArea.appendChild(renderer.createCompnayInfoAndFiscalYearInputs(data.companyName, data.fiscalYear));
-    inputArea.appendChild(renderer.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createCompnayInfoAndFiscalYearInputs(data.companyName, data.fiscalYear));
+    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
 
     appendCategoryList(inputArea, ID_DEBIT_CATEGORIES, '지출(차변)',
         Object.values(data.debitCategories), ID_DEBIT_CATEGORY_PRESET, debitPresetList);
-    inputArea.appendChild(renderer.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
 
     appendCategoryList(inputArea, ID_CREDIT_CATEGORIES, '수입(대변)',
         Object.values(data.creditCategories), ID_CREDIT_CATEGORY_PRESET, creditPresetList);
-    inputArea.appendChild(renderer.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
 
-    inputArea.appendChild(renderer.createBtnTransform());
+    inputArea.appendChild(rendererCommon.createBtnTransform());
     inputArea.querySelector('#btnTransform').addEventListener('click', (event) => transform());
 }
 
 function appendCategoryList(parentElement, groupId, groupName, categories, presetId, presetList) {
-    const categoryList = renderer.createCategoryList(groupId, groupName, categories, presetId, presetList);
+    const categoryList = rendererCreditDebit.createCategoryList(groupId, groupName, categories, presetId, presetList);
     parentElement.appendChild(categoryList);
     parentElement.querySelectorAll(`#${groupId} input[type="radio"]`).forEach(elem => {
         elem.addEventListener('change', event => onChangeCategoryInputMode(groupId, event));
@@ -117,7 +118,7 @@ function transform() {
 
     const printPageCountArea = document.getElementById('printPageCountArea');
     printPageCountArea.innerHTML = "";
-    printPageCountArea.appendChild(renderer.createPageCountSelect(DEFAULT_PAGE_COUNT));
+    printPageCountArea.appendChild(rendererCreditDebit.createPageCountSelect(DEFAULT_PAGE_COUNT));
     const pageCountSelect = printPageCountArea.querySelector('#pageCount')
     pageCountSelect.addEventListener('change', event => {
         renderPageButtons(event.target.value);
@@ -163,13 +164,13 @@ function renderPageButtons(pageCount) {
     const printPageButtonsArea = document.getElementById('printPageButtonsArea');
     printPageButtonsArea.innerHTML = "";
 
-    const debitButtonsDiv = renderer.createPageButtons(pageCount, "지출(차변)", data.debitRecords.length);
+    const debitButtonsDiv = rendererCreditDebit.createPageButtons(pageCount, "지출(차변)", data.debitRecords.length);
     printPageButtonsArea.appendChild(debitButtonsDiv);
     debitButtonsDiv.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', event => showReports('debit', data.debitRecords, button.value, pageCount));
     });
 
-    const creditButtonsDiv = renderer.createPageButtons(pageCount, "수입(대변)", data.creditRecords.length);
+    const creditButtonsDiv = rendererCreditDebit.createPageButtons(pageCount, "수입(대변)", data.creditRecords.length);
     printPageButtonsArea.appendChild(creditButtonsDiv);
     creditButtonsDiv.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', event => showReports('credit', data.creditRecords, button.value, pageCount));
@@ -196,11 +197,11 @@ function showReports(reportType, records, startIndex, pageCount) {
     let html = "";
     switch (reportType) {
         case 'debit':
-            html = renderer.createDebitReport(data.companyName, data.fiscalYear, subRecords);
+            html = rendererCreditDebit.createDebitReport(data.companyName, data.fiscalYear, subRecords);
             break;
 
         case 'credit':
-            html = renderer.createCreditReport(data.companyName, data.fiscalYear, subRecords);
+            html = rendererCreditDebit.createCreditReport(data.companyName, data.fiscalYear, subRecords);
             break;
     }
     printArea.innerHTML = html;

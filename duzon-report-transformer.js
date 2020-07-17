@@ -1,9 +1,13 @@
+import renderer from './templates-common.js';
 import {
     parseDuzonReport
 } from './duzon-report-parser.js';
 import {
     renderCreditDebitReportInputArea
 } from './credit-debit-report.js';
+import {
+    renderCategoryReportInputArea
+} from './category-report.js';
 
 document.getElementById('btnReadFile').addEventListener('click', (event) => {
     const file = document.getElementById('srcFile').files[0];
@@ -17,5 +21,14 @@ document.getElementById('btnReadFile').addEventListener('click', (event) => {
 });
 
 function onCompleteParse(data) {
-    renderCreditDebitReportInputArea(data);
+    document.getElementById('selectReportTypeArea')
+        .appendChild(renderer.createReportTypeButtons());
+
+    document.getElementById('btnCreditDebitReport').addEventListener('click',
+        event => renderCreditDebitReportInputArea(data)
+    );
+
+    document.getElementById('btnCategoryReport').addEventListener('click',
+        event => renderCategoryReportInputArea(data)
+    );
 }

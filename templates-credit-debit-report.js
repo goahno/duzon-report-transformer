@@ -9,14 +9,6 @@ import {
 } from './template-credit-report.js';
 
 const templates = {
-
-    coampanyInfoAndFiscalYear: `
-        <div>
-            회사명: <input type="text" id="inputCompanyName" value="{{companyName}}">
-            회계년도: <input type="text" id="inputFiscalYear" maxlength="4" value="{{fiscalYear}}">
-        </div>
-    `.removeWhitespaces(),
-
     categoryList: `
         <div id="{{groupId}}" class="category-container">
             {{groupName}} 계정과목
@@ -60,21 +52,9 @@ const templates = {
             </div>
         </div>
     `.removeWhitespaces(),
-
-    categoryGroupDivider: '<hr class="category-group-divider">',
-
-    btnTransform: '<button id="btnTransform">변환하기</button>',
 }
 
 class TemplateRenderer {
-    createCompnayInfoAndFiscalYearInputs(companyName, fiscalYear) {
-        const rendered = Mustache.render(templates.coampanyInfoAndFiscalYear, {
-            companyName: companyName,
-            fiscalYear: fiscalYear,
-        });
-        return createElementFromHtmlString(rendered);
-    }
-
     createCategoryList(groupId, groupName, categories, presetId, presetList) {
         const rendered = Mustache.render(templates.categoryList, {
             groupId: groupId,
@@ -84,14 +64,6 @@ class TemplateRenderer {
             presetList: presetList,
         });
         return createElementFromHtmlString(rendered);
-    }
-
-    createCategoryGroupDivider() {
-        return createElementFromHtmlString(templates.categoryGroupDivider);
-    }
-
-    createBtnTransform() {
-        return createElementFromHtmlString(templates.btnTransform);
     }
 
     createOption(text, value, isSelected) {
@@ -154,7 +126,6 @@ class TemplateRenderer {
 
 const renderer = new TemplateRenderer();
 export {
-    templates,
     renderer as
     default
 };
