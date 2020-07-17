@@ -245,6 +245,8 @@ function transform() {
     });
 
     renderPageButtons(pageCountSelect.value);
+
+    setCurrentPages('');
 }
 
 function setCategoryValues(elementId, categories) {
@@ -292,7 +294,11 @@ function showReports(reportType, records, startIndex, pageCount) {
     if (!Number.isInteger(pageCount)) {
         pageCount = parseInt(pageCount);
     }
-    const end = startIndex + pageCount;
+
+    let end = startIndex + pageCount;
+    if (pageCount <= 0) {
+        end = records.length;
+    }
 
     const subRecords = records.slice(startIndex, end);
 
@@ -309,5 +315,9 @@ function showReports(reportType, records, startIndex, pageCount) {
     }
     printArea.innerHTML = html;
 
-    document.getElementById('currentPages').innerHTML = `현재 표시 중 : ${startIndex + 1} ~ ${startIndex + subRecords.length}`;
+    setCurrentPages(`현재 표시 중 : ${startIndex + 1} ~ ${startIndex + subRecords.length}`);
+}
+
+function setCurrentPages(str) {
+    document.getElementById('currentPages').innerHTML = str;
 }
