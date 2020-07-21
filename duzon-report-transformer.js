@@ -10,6 +10,8 @@ import {
 } from './category-report.js';
 
 document.getElementById('btnReadFile').addEventListener('click', (event) => {
+    clearInputAndReport();
+
     const file = document.getElementById('srcFile').files[0];
     if (!file) {
         alert('선택된 파일이 없습니다.');
@@ -31,4 +33,16 @@ function onCompleteParse(data) {
     document.getElementById('btnCategoryReport').addEventListener('click',
         event => renderCategoryReportInputArea(data)
     );
+}
+
+function clearInputAndReport() {
+    clearInnerHtmlById('selectReportTypeArea');
+    clearInnerHtmlById('inputArea');
+    clearInnerHtmlById('printPageCountArea');
+    clearInnerHtmlById('printPageButtonsArea');
+    clearInnerHtmlById('currentPages');
+}
+
+function clearInnerHtmlById(id) {
+    document.getElementById(id).innerHTML = '';
 }

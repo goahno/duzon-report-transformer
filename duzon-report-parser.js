@@ -37,6 +37,8 @@ function onCompleteReadFile(csv) {
         {
             companyName: companyName,
             fiscalYear: fiscalYear,
+            startDate: startDate,
+            endDate: endDate,
             debitCategories: debitCategories,
             creditCategories: creditCategories,
             debitRecords: debitRecords,

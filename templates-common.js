@@ -18,7 +18,7 @@ const templates = {
         </div>
     `.removeWhitespaces(),
 
-    categoryGroupDivider: '<hr class="category-group-divider">',
+    divider: '<hr class="divider">',
 
     btnTransform: '<button id="btnTransform">변환하기</button>',
 }
@@ -36,8 +36,8 @@ class TemplateRenderer {
         return createElementFromHtmlString(rendered);
     }
 
-    createCategoryGroupDivider() {
-        return createElementFromHtmlString(templates.categoryGroupDivider);
+    createDivider() {
+        return createElementFromHtmlString(templates.divider);
     }
 
     createBtnTransform() {

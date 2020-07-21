@@ -25,17 +25,15 @@ function renderInputArea() {
     const inputArea = document.getElementById('inputArea');
     inputArea.innerHTML = '';
 
-    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createDivider());
     inputArea.appendChild(rendererCommon.createCompnayInfoAndFiscalYearInputs(data.companyName, data.fiscalYear));
-    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
+    inputArea.appendChild(rendererCommon.createDivider());
 
     appendCategoryList(inputArea, ID_DEBIT_CATEGORIES, '지출(차변)',
         Object.values(data.debitCategories), ID_DEBIT_CATEGORY_PRESET, debitPresetList);
-    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
 
     appendCategoryList(inputArea, ID_CREDIT_CATEGORIES, '수입(대변)',
         Object.values(data.creditCategories), ID_CREDIT_CATEGORY_PRESET, creditPresetList);
-    inputArea.appendChild(rendererCommon.createCategoryGroupDivider());
 
     inputArea.appendChild(rendererCommon.createBtnTransform());
     inputArea.querySelector('#btnTransform').addEventListener('click', (event) => transform());
@@ -48,6 +46,8 @@ function appendCategoryList(parentElement, groupId, groupName, categories, prese
         elem.addEventListener('change', event => onChangeCategoryInputMode(groupId, event));
     })
     parentElement.querySelector(`#${groupId} .btn-apply`).addEventListener('click', (event) => onClickBtnApply(groupId));
+
+    parentElement.appendChild(rendererCommon.createDivider());
 }
 
 function onChangeCategoryInputMode(groupId, event) {

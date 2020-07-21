@@ -30,23 +30,27 @@
         padding-bottom: 5px;
     }
 
-    th:nth-child(1),
-    td:nth-child(1) {
+    .column-checkbox {
         width: 25px;
     }
 
-    th:nth-child(2),
-    td:nth-child(2) {
+    .column-category-name {
         width: 270px;
     }
 
-    th:nth-child(n+3):nth-last-child(n+1),
-    td:nth-child(n+3):nth-last-child(n+1) {
+    .column-gwan,
+    .column-hang,
+    .column-mok,
+    .column-total-amount {
         width: 150px;
 
         >input[type="text"] {
             width: 140px;
         }
+    }
+
+    .column-total-amount>input[type="text"] {
+        text-align: right;
     }
 
     .category-list-item:nth-child(even) {
@@ -90,7 +94,7 @@
                 width: 140px;
             }
         }
-        
+
         >:last-child {
             grid-column: 3;
             grid-row: 1 / span 2;
@@ -98,7 +102,7 @@
     }
 }
 
-.category-group-divider {
+.divider {
     width: @width;
     text-align: left;
     margin-left: 0;
@@ -602,5 +606,117 @@
 
     .row-7 {
         height: 26mm;
+    }
+}
+
+.category-report {
+    width: 193mm;
+    height: 255mm;
+
+    @fontTitle: 6.7mm;
+    @fontTableHead: 3.9mm;
+    @fontContent: 3.5mm;
+
+    @borderBold: 0.8mm solid black;
+    @borderNormal: 0.5mm solid black;
+
+    @colorBgGray: #c0c0c0;
+
+    @media print {
+        margin-bottom: @printMarginBottom;
+    }
+
+    .border-top-normal {
+        border-top: @borderNormal;
+    }
+
+    .border-bottom-normal {
+        border-bottom: @borderNormal;
+    }
+
+    .ta-c {
+        text-align: center;
+    }
+
+    .ws-pre {
+        white-space: pre;
+    }
+
+    .indent-5 {
+        text-indent: 5mm;
+    }
+
+    .report-title {
+        font-size: @fontTitle;
+        text-align: center;
+    }
+
+    .report-duration {
+        font-size: @fontContent;
+        text-align: center;
+        margin-top: 6mm;
+    }
+
+    .report-company-name-and-category-name {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4mm;
+
+        >span {
+            font-size: @fontContent;
+            margin-left: 2mm;
+            margin-right: 2mm;
+        }
+    }
+
+    table {
+        margin-top: 4mm;
+        border-top: @borderBold;
+        border-bottom: @borderBold;
+        border-collapse: collapse;
+    }
+
+    thead>tr,
+    .monthly-sum-record {
+        background-color: @colorBgGray;
+    }
+
+    th {
+        font-size: @fontTableHead;
+        border: @borderBold;
+    }
+
+    td {
+        font-size: @fontContent;
+    }
+
+    th,
+    td {
+        padding: 1mm;
+    }
+
+    th:first-child,
+    td:first-child {
+        width: 12mm;
+        text-align: center;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: 48mm;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 36mm;
+    }
+
+    th:nth-child(n+4),
+    td:nth-child(n+4) {
+        width: 27mm;
+    }
+
+    td:nth-child(n+4) {
+        text-align: right;
     }
 }

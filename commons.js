@@ -19,3 +19,21 @@ export function getUrlParams() {
 export function toPadString(number, length, pad) {
     return String(number).padStart(length, pad);
 }
+
+export function toInt(src) {
+    if (typeof src === 'number') {
+        return src;
+    }
+
+    if (typeof src === 'string') {
+        src = src.replace(/[^0-9]/g, '');
+    }
+    return parseInt(src);
+}
+
+export function stringWithCommas(x) {
+    if (typeof x !== 'string') {
+        x = x.toString();
+    }
+    return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

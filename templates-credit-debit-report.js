@@ -15,21 +15,21 @@ const templates = {
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>계정과목</th>
-                        <th>관</th>
-                        <th>항</th>
-                        <th>목</th>
+                        <th class="column-checkbox"></th>
+                        <th class="column-category-name">계정과목</th>
+                        <th class="column-gwan">관</th>
+                        <th class="column-hang">항</th>
+                        <th class="column-mok">목</th>
                     </tr>
                 </thead>
                 <tbody class="category-list-container">
                     {{#categories}}
                     <tr class="category-list-item">
-                        <td><input type="checkbox"></td>
-                        <td>{{title}}</td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                        <td class="column-checkbox"><input type="checkbox"></td>
+                        <td class="column-category-name">{{title}}</td>
+                        <td class="column-gwan"><input type="text"></td>
+                        <td class="column-hang"><input type="text"></td>
+                        <td class="column-mok"><input type="text"></td>
                     </tr>
                     {{/categories}}
                 </tbody>
