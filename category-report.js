@@ -1,7 +1,7 @@
 import rendererCommon from './templates-common.js';
 import rendererCategoryReport from './templates-category-report.js';
 import {
-    toInt
+    toNumber
 } from './commons.js';
 
 const ID_DEBIT_CATEGORIES = 'debitCategories';
@@ -21,7 +21,7 @@ function groupByCategory(records) {
         const category = record.category;
 
         const totalAmount = category.totalAmount || 0;
-        category.totalAmount = totalAmount + toInt(record.amount);
+        category.totalAmount = totalAmount + toNumber(record.amount);
 
         if (!category.records) {
             category.records = [];
@@ -81,7 +81,7 @@ function createReportData(groupId, categories) {
         .forEach(elem => {
             const key = elem.querySelector('.column-category-name').innerHTML;
             const amount = elem.querySelector('input[type="text"]').value;
-            categories[key].totalAmount = toInt(amount);
+            categories[key].totalAmount = toNumber(amount);
         });
 }
 

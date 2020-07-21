@@ -20,15 +20,15 @@ export function toPadString(number, length, pad) {
     return String(number).padStart(length, pad);
 }
 
-export function toInt(src) {
+export function toNumber(src) {
     if (typeof src === 'number') {
         return src;
     }
 
     if (typeof src === 'string') {
-        src = src.replace(/[^0-9]/g, '');
+        src = src.replace(/[^0-9-.]/g, '');
     }
-    return parseInt(src);
+    return Number(src);
 }
 
 export function stringWithCommas(x) {

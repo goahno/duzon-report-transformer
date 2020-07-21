@@ -1,7 +1,7 @@
 import {
     createElementFromHtmlString,
     stringWithCommas,
-    toInt,
+    toNumber,
 } from './commons.js';
 import {
     templateCategoryReport
@@ -91,7 +91,7 @@ class TemplateRenderer {
                 }
                 const record = category.records[i];
 
-                const amount = toInt(record.amount);
+                const amount = toNumber(record.amount);
                 sum += amount;
                 monthlySum += amount;
 
