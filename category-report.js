@@ -80,7 +80,7 @@ function transform() {
 function createReportData(groupId, categories) {
     document.querySelectorAll(`#${groupId} .category-list-container tr`)
         .forEach(elem => {
-            const key = elem.querySelector('.column-category-name').innerHTML;
+            const key = elem.querySelector('.column-category-name').textContent;
             const amount = elem.querySelector('input[type="text"]').value;
             categories[key].totalAmount = toNumber(amount);
         });

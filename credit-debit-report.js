@@ -132,7 +132,7 @@ function transform() {
 
 function setCategoryValues(elementId, categories) {
     document.querySelectorAll(`#${elementId} .category-list-container tr`).forEach(elem => {
-        const key = elem.querySelector('td:nth-child(2)').innerHTML;
+        const key = elem.querySelector('td:nth-child(2)').textContent;
         const values = [];
         elem.querySelectorAll('input[type=text]').forEach(input => {
             values.push(input.value);
