@@ -1,5 +1,6 @@
 import {
-    createElementFromHtmlString
+    createElementFromHtmlString,
+    mustacheFormattedNumber,
 } from './commons.js';
 import {
     templateDebitReport
@@ -112,6 +113,7 @@ class TemplateRenderer {
             companyName: companyName,
             fiscalYear: fiscalYear,
             records: records,
+            formattedNumber: mustacheFormattedNumber,
         });
     }
 
@@ -120,6 +122,7 @@ class TemplateRenderer {
             companyName: companyName,
             fiscalYear: fiscalYear,
             records: records,
+            formattedNumber: mustacheFormattedNumber,
         });
     }
 }

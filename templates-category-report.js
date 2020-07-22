@@ -1,6 +1,6 @@
 import {
     createElementFromHtmlString,
-    stringWithCommas,
+    mustacheFormattedNumber,
     toNumber,
 } from './commons.js';
 import {
@@ -147,16 +147,6 @@ function newReportCategory(title) {
     return {
         title: title,
         records: [],
-    }
-}
-
-function mustacheFormattedNumber() {
-    return function (text, render) {
-        const str = render(text);
-        if (str.includes(',')) {
-            return str;
-        }
-        return stringWithCommas(str);
     }
 }
 

@@ -104,7 +104,7 @@ export const templateDebitReport = `
                     <tbody>
                         <tr>
                             <td>공급가액</td>
-                            <td>{{amount}} </td>
+                            <td>{{#formattedNumber}}{{amount}}{{/formattedNumber}} </td>
                         </tr>
                         <tr>
                             <td>부 가 세</td>
@@ -112,7 +112,7 @@ export const templateDebitReport = `
                         </tr>
                         <tr>
                             <td>합     계</td>
-                            <td>{{amount}} </td>
+                            <td>{{#formattedNumber}}{{amount}}{{/formattedNumber}} </td>
                         </tr>
                         <tr>
                             <td>소 득 세</td>
@@ -132,7 +132,7 @@ export const templateDebitReport = `
                         </tr>
                         <tr>
                             <td>지 급 액</td>
-                            <td>{{amount}} </td>
+                            <td>{{#formattedNumber}}{{amount}}{{/formattedNumber}} </td>
                         </tr>
                     </tbody>
                 </table>

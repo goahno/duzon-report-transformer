@@ -9,6 +9,28 @@
     margin-top: 10px;
 }
 
+#inputCompanyName {
+    width: 250px;
+}
+
+#inputFiscalYearLabel {
+    margin-left: 20px;
+}
+
+#inputFiscalYear {
+    width: 50px;
+}
+
+#inputCompanyLabelAndName {
+    width: 250px;
+}
+
+.hide-extra {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .category-container {
     width: @width;
 
@@ -706,9 +728,20 @@
         width: 48mm;
     }
 
+    .description {
+        width: 48mm;
+        .hide-extra();
+    }
+
+
     th:nth-child(3),
     td:nth-child(3) {
         width: 36mm;
+    }
+
+    .customer {
+        width: 36mm;
+        .hide-extra();
     }
 
     th:nth-child(n+4),

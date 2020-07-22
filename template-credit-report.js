@@ -50,7 +50,7 @@ export const templateCreditReport = `
             </table>
             <div class="amount-box">
                 <div>금 {{amountHangul}}원 정  </div>
-                <div>{{amount}}  </div>
+                <div>{{#formattedNumber}}{{amount}}{{/formattedNumber}}  </div>
             </div>
             <div class="payer-name-box">
                 <div>납부자 주소 성명(상호)</div>

@@ -33,10 +33,10 @@ export const templateCategoryReport = `
                         {{^isMonthlySumRecord}}
                             <tr>
                                 <td>{{month}}-{{dayOfMonth}}</td>
-                                <td>{{description}}</td>
-                                <td>{{customer}}</td>
+                                <td><div class="description">{{description}}</div></td>
+                                <td><div class="customer">{{customer}}</div></td>
                                 <td></td>
-                                <td>{{amount}}</td>
+                                <td>{{#formattedNumber}}{{amount}}{{/formattedNumber}}</td>
                                 <td>{{#formattedNumber}}{{leftAmount}}{{/formattedNumber}}</td>
                             </tr>
                         {{/isMonthlySumRecord}}

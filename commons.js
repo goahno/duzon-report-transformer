@@ -41,3 +41,20 @@ export function stringWithCommas(x) {
 export function clearInnerHtmlById(id) {
     document.getElementById(id).innerHTML = '';
 }
+
+export function limitedText(text, limit) {
+    if (text.length <= limit) {
+        return text;
+    }
+    return text.substring(0, limit);
+}
+
+export function mustacheFormattedNumber() {
+    return function (text, render) {
+        const str = render(text);
+        if (str.includes(',')) {
+            return str;
+        }
+        return stringWithCommas(str);
+    }
+}

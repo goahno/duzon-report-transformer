@@ -1,12 +1,16 @@
 import {
-    createElementFromHtmlString
+    createElementFromHtmlString,
 } from './commons.js';
 
 const templates = {
     coampanyInfoAndFiscalYear: `
         <div>
-            회사명: <input type="text" id="inputCompanyName" value="{{companyName}}">
-            회계년도: <input type="text" id="inputFiscalYear" maxlength="4" value="{{fiscalYear}}">
+            <label>
+                회사명: <input type="text" id="inputCompanyName" value="{{companyName}}">
+            </label>
+            <label id="inputFiscalYearLabel">
+                회계년도: <input type="text" id="inputFiscalYear" maxlength="4" value="{{fiscalYear}}">
+            </label>
         </div>
     `.removeWhitespaces(),
 
