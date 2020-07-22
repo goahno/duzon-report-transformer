@@ -3,14 +3,6 @@ import {
 } from './commons.js';
 
 const templates = {
-
-    reportTypeButtons: `
-        <div>
-            <button id="btnCreditDebitReport">징수(수입), 지출 결의서</button>
-            <button id="btnCategoryReport">징수부, 지출부</button>
-        </div>
-    `.removeWhitespaces(),
-
     coampanyInfoAndFiscalYear: `
         <div>
             회사명: <input type="text" id="inputCompanyName" value="{{companyName}}">
@@ -24,10 +16,6 @@ const templates = {
 }
 
 class TemplateRenderer {
-    createReportTypeButtons() {
-        return createElementFromHtmlString(templates.reportTypeButtons);
-    }
-
     createCompnayInfoAndFiscalYearInputs(companyName, fiscalYear) {
         const rendered = Mustache.render(templates.coampanyInfoAndFiscalYear, {
             companyName: companyName,

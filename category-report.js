@@ -1,7 +1,8 @@
 import rendererCommon from './templates-common.js';
 import rendererCategoryReport from './templates-category-report.js';
 import {
-    toNumber
+    toNumber,
+    clearInnerHtmlById,
 } from './commons.js';
 
 const ID_DEBIT_CATEGORIES = 'debitCategories';
@@ -64,7 +65,7 @@ function transform() {
     createReportData(ID_DEBIT_CATEGORIES, data.debitCategories);
     createReportData(ID_CREDIT_CATEGORIES, data.creditCategories);
 
-    document.getElementById('printArea').innerHTML = '';
+    clearInnerHtmlById('printArea');
 
     const printPageButtonsArea = document.getElementById('printPageButtonsArea');
     printPageButtonsArea.innerHTML = '';

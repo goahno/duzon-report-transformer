@@ -1,4 +1,4 @@
-import renderer from './templates-common.js';
+import { clearInnerHtmlById } from './commons.js';
 import {
     parseDuzonReport
 } from './duzon-report-parser.js';
@@ -9,7 +9,11 @@ import {
     renderCategoryReportInputArea
 } from './category-report.js';
 
-document.getElementById('btnReadFile').addEventListener('click', (event) => {
+document.querySelectorAll('#readButtonArea >button').forEach(elem => {
+    elem.addEventListener('click', onClickReportButton);
+});
+
+function onClickReportButton(event) {
     clearInputAndReport();
 
     const file = document.getElementById('srcFile').files[0];
@@ -19,30 +23,27 @@ document.getElementById('btnReadFile').addEventListener('click', (event) => {
     }
 
     const fileEncoding = document.getElementById('fileEncoding').value
-    parseDuzonReport(file, fileEncoding, onCompleteParse);
-});
+    parseDuzonReport(file, fileEncoding,
+        data => onCompleteParse(event.target.value, data));
+}
 
-function onCompleteParse(data) {
-    document.getElementById('selectReportTypeArea')
-        .appendChild(renderer.createReportTypeButtons());
+function onCompleteParse(type, data) {
+    console.log(data);
+    switch (type) {
+        case 'creditDebitReport':
+            renderCreditDebitReportInputArea(data)
+            break;
 
-    document.getElementById('btnCreditDebitReport').addEventListener('click',
-        event => renderCreditDebitReportInputArea(data)
-    );
-
-    document.getElementById('btnCategoryReport').addEventListener('click',
-        event => renderCategoryReportInputArea(data)
-    );
+        case 'categoryReport':
+            renderCategoryReportInputArea(data)
+            break;
+    }
 }
 
 function clearInputAndReport() {
-    clearInnerHtmlById('selectReportTypeArea');
     clearInnerHtmlById('inputArea');
     clearInnerHtmlById('printPageCountArea');
     clearInnerHtmlById('printPageButtonsArea');
     clearInnerHtmlById('currentPages');
-}
-
-function clearInnerHtmlById(id) {
-    document.getElementById(id).innerHTML = '';
+    clearInnerHtmlById('printArea');
 }

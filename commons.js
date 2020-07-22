@@ -37,3 +37,7 @@ export function stringWithCommas(x) {
     }
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+export function clearInnerHtmlById(id) {
+    document.getElementById(id).innerHTML = '';
+}

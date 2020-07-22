@@ -4,6 +4,7 @@ import {
     debitPresetList,
     creditPresetList
 } from './category-preset.js';
+import { clearInnerHtmlById } from './commons.js';
 
 const ID_DEBIT_CATEGORIES = 'debitCategories';
 const ID_DEBIT_CATEGORY_PRESET = 'debitCategoryPreset'
@@ -159,7 +160,8 @@ function renderPageButtons(pageCount) {
         pageCount = DEFAULT_PAGE_COUNT;
     }
 
-    document.getElementById('printArea').innerHTML = "";
+    clearInnerHtmlById('printArea');
+    setCurrentPages('');
 
     const printPageButtonsArea = document.getElementById('printPageButtonsArea');
     printPageButtonsArea.innerHTML = "";

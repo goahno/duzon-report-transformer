@@ -14,14 +14,15 @@ let baseMonth = 0;
 let companyName;
 let fiscalYear;
 let currentCategory = '';
-const debitCategories = {}; // 지출(차변) 과목
-const creditCategories = {}; // 수입(대변) 과목
-const debitRecords = []; // 지출(차변) 내역
-const creditRecords = []; // 수입(대변) 내역
+let debitCategories = {}; // 지출(차변) 과목
+let creditCategories = {}; // 수입(대변) 과목
+let debitRecords = []; // 지출(차변) 내역
+let creditRecords = []; // 수입(대변) 내역
 
 let onCompleteListener;
 
 export function parseDuzonReport(file, fileEncoding, onComplete) {
+    clearData();
     onCompleteListener = onComplete;
 
     Papa.parse(file, {
@@ -29,6 +30,19 @@ export function parseDuzonReport(file, fileEncoding, onComplete) {
         skipEmptyLines: 'greedy',
         complete: onCompleteReadFile,
     });
+}
+
+function clearData() {
+    startDate = null;
+    endDate = null;
+    baseMonth = 0;
+    companyName = '';
+    fiscalYear = 0;
+    currentCategory = '';
+    debitCategories = {};
+    creditCategories = {};
+    debitRecords = [];
+    creditRecords = [];
 }
 
 function onCompleteReadFile(csv) {
