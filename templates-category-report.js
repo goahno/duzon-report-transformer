@@ -8,7 +8,7 @@ import {
 } from './template-category-report.js';
 
 const DATE_FORMAT = "YYYY.MM.DD";
-const RECORD_PER_PAGE = 30;
+const RECORD_PER_PAGE = 35;
 
 const templates = {
     reportInfo: `
@@ -76,19 +76,12 @@ class TemplateRenderer {
             let sum = 0;
             let monthlySum = 0;
 
-            let rowCount = 0;
-            let reportCategory = newReportCategory(category.title);
+            const reportCategory = newReportCategory(category.title);
             reportCategory.records.push({
                 isTotalAmountRecord: true,
                 totalAmount: category.totalAmount,
             });
-            rowCount++;
             for (let i = 0; i < category.records.length; i++) {
-                if (rowCount >= RECORD_PER_PAGE) {
-                    reportCategories.push(reportCategory);
-                    reportCategory = newReportCategory(category.title);
-                    rowCount = 0;
-                }
                 const record = category.records[i];
 
                 const amount = toNumber(record.amount);
@@ -104,21 +97,22 @@ class TemplateRenderer {
                     amount: record.amount,
                     leftAmount: category.totalAmount - sum,
                 });
-                rowCount++;
 
                 const nextRecord = category.records[i + 1];
                 if (!nextRecord || record.month !== nextRecord.month) {
                     reportCategory.records.push({
                         isMonthlySumRecord: true,
                         monthlySum: monthlySum,
+                    });
+                    reportCategory.records.push({
+                        isSumRecord: true,
                         sum: sum,
                     });
-                    rowCount += 2;
                     monthlySum = 0;
                 }
             }
 
-            reportCategories.push(reportCategory);
+            pushReportCategory(reportCategories, reportCategory);
         });
 
         const reportData = {
@@ -140,6 +134,21 @@ class TemplateRenderer {
         }
 
         return Mustache.render(templateCategoryReport, reportData);
+    }
+}
+
+function pushReportCategory(categories, sourceCategory) {
+    const records = sourceCategory.records;
+    if (records.length <= RECORD_PER_PAGE) {
+        categories.push(sourceCategory);
+        return;
+    }
+
+    for (let i = 0; i < records.length; i += RECORD_PER_PAGE) {
+        const recordPart = records.slice(i, i + RECORD_PER_PAGE);
+        const category = newReportCategory(sourceCategory.title);
+        category.records = recordPart;
+        categories.push(category);
     }
 }
 
