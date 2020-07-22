@@ -7,6 +7,7 @@ import {
 
 const DURATION_DATE_FORMAT = 'YYYY.MM.DD';
 const RECORD_DATE_FORMAT = 'MM월 DD일';
+const RECORD_DATE_FORMAT2 = 'MM-DD';
 
 let startDate;
 let endDate;
@@ -69,7 +70,7 @@ function parseLine(line) {
         }
     }
 
-    if (line[0].startsWith('회사명:')) {
+    if (line[6].startsWith('계정과목')) {
         setCompanyName(line[0]);
         setCurrentCategory(line[6]);
         return;
@@ -77,6 +78,7 @@ function parseLine(line) {
 
     if (line[0] && (line[0] !== '날짜')) {
         addRecord(line);
+        return;
     }
 }
 
@@ -105,7 +107,12 @@ function setCurrentCategory(str) {
 }
 
 function createRecordDate(dateString) {
-    const date = moment(dateString, RECORD_DATE_FORMAT);
+    let dateFormat = RECORD_DATE_FORMAT;
+    if (dateString.includes('-')) {
+        dateFormat = RECORD_DATE_FORMAT2;
+    }
+
+    const date = moment(dateString, dateFormat);
     if (date.month() < baseMonth) {
         date.year(endDate.year());
     } else {
