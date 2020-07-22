@@ -28,7 +28,6 @@ function onClickReportButton(event) {
 }
 
 function onCompleteParse(type, data) {
-    console.log(data);
     switch (type) {
         case 'creditDebitReport':
             renderCreditDebitReportInputArea(data)
